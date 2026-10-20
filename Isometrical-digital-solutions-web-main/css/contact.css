@@ -1,0 +1,173 @@
+/* =========================================================
+   CONTACTO · panel con el correo y qué contarnos
+   Igual que Planes, oculta la lista y el detalle (js/app.js → showSection)
+   ========================================================= */
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: var(--gap-columns);
+  align-items: start;
+}
+
+.contact-eyebrow {
+  margin: 0 0 var(--space-3);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-heading {
+  margin: 0;
+  font-size: clamp(32px, 3.6vw, 52px);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+
+.contact-intro {
+  max-width: 46ch;
+  margin: var(--space-4) 0 0;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--soft);
+}
+
+/* ---------- El correo, grande y fácil de copiar ---------- */
+.contact-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015)), var(--bg);
+}
+
+.ce-address {
+  min-width: 0;
+  font-family: var(--friendly);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 300;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.ce-copy,
+.contact-alt {
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 999px;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--quick) var(--glide), color var(--quick) var(--glide), border-color var(--quick) var(--glide);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ce-copy {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* ---------- Botones ---------- */
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.contact-actions .cta { margin-top: 0; }
+
+.contact-alt {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 26px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ce-copy:focus-visible,
+.contact-alt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.contact-note {
+  margin: var(--space-3) 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Columna lateral: qué contarnos y dónde estamos ---------- */
+.contact-side {
+  padding: var(--space-6) var(--space-5);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012) 60%), var(--bg);
+}
+
+.contact-topics {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-topics li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--soft);
+}
+
+/* Visto dibujado con dos bordes, como en Planes */
+.contact-topics li::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 11px;
+  height: 6px;
+  border-left: 1.5px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+  transform: translateY(-2px) rotate(-45deg);
+}
+
+.contact-place {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.contact-place-name {
+  margin: 0;
+  font-family: var(--friendly);
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.contact-place-note {
+  margin: var(--space-1) 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Entrada al abrir Contacto */
+.contact.enter > * { animation: rise .3s var(--glide) both; }
+.contact.enter > :nth-child(2) { animation-delay: 60ms; }

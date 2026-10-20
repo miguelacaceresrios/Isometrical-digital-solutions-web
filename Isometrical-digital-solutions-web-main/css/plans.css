@@ -1,0 +1,260 @@
+/* =========================================================
+   PLANES · tarjetas de precios lado a lado
+   En Planes se ocultan la lista y el detalle (js/app.js) y las tarjetas
+   ocupan todo el ancho, para comparar los planes de un vistazo
+   ========================================================= */
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 18px;
+  /* Fondo sólido: las ondas no se ven a través de la tarjeta */
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012) 60%), var(--bg);
+  transition: border-color var(--quick) var(--glide), transform var(--move) var(--spring), box-shadow var(--move) var(--glide);
+}
+
+/* El producto principal se destaca un poco, sin gritar */
+.plan.featured {
+  border-color: rgba(255, 255, 255, .26);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02) 60%), var(--bg);
+}
+
+/* La tarjeta elegida (cursor, teclado o "Ver precio") se levanta y brilla */
+.plan.on {
+  border-color: rgba(255, 255, 255, .55);
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .06), 0 24px 48px -24px rgba(255, 255, 255, .22);
+}
+
+.plan.on::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 24px rgba(255, 255, 255, .12);
+  pointer-events: none;
+  animation: plan-glow var(--breath) ease-in-out infinite;
+}
+
+@keyframes plan-glow {
+  0%, 100% { opacity: .45; }
+  50% { opacity: 1; }
+}
+
+/* ---------- Contenido de la tarjeta ---------- */
+/* min-height: con o sin etiqueta, los nombres de las tres tarjetas quedan a la misma altura */
+.plan-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 24px;
+  margin: 0 0 var(--space-3);
+}
+
+.plan-model {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.plan-badge {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* Nombres y precios en Outfit, una letra redonda y amigable; Michroma queda solo para el título */
+.plan-name {
+  margin: 0;
+  font-family: var(--friendly);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.plan-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+  min-height: 40px;
+  margin: var(--space-4) 0 0;
+}
+
+.pp-from {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pp-amount {
+  font-family: var(--friendly);
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* "pago único" o "al mes" siempre en su propia línea, igual en las tres tarjetas */
+.pp-unit {
+  flex-basis: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--soft);
+}
+
+.pp-ask {
+  font-family: var(--friendly);
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--soft);
+}
+
+.plan-terms {
+  margin: var(--space-1) 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.plan-desc {
+  margin: var(--space-3) 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--soft);
+}
+
+.plan-packages {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.plan-packages li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* Nombre del paquete y, debajo, lo que lo diferencia */
+.pk-name {
+  display: grid;
+  gap: 2px;
+}
+
+.pk-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.pk-price {
+  font-family: var(--friendly);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--soft);
+}
+
+/* Nota al pie de las tres tarjetas */
+.plans-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 13px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.plan-includes {
+  display: grid;
+  gap: 10px;
+  margin: var(--space-5) 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.plan-includes li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--soft);
+}
+
+/* Visto dibujado con dos bordes */
+.plan-includes li::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 11px;
+  height: 6px;
+  border-left: 1.5px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+  transform: translateY(-2px) rotate(-45deg);
+}
+
+/* El botón queda abajo en las tres tarjetas, aunque cada una tenga distinto contenido */
+.plan-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  margin-top: auto;
+  padding: 0 var(--space-5);
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 999px;
+  color: var(--fg);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--quick) var(--glide), color var(--quick) var(--glide), border-color var(--quick) var(--glide);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.plan.featured .plan-cta {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.plan-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Entrada en cascada al abrir Planes */
+.plans.enter .plan {
+  animation: rise .3s var(--glide) both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+.plans.enter .plans-note {
+  animation: rise .3s var(--glide) both;
+  animation-delay: 160ms;
+}

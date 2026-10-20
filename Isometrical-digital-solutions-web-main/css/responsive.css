@@ -1,0 +1,215 @@
+/* =========================================================
+   ADAPTACIONES · mouse, pantallas bajas, tablet, celular y movimiento reducido
+   Va al final: estas reglas ajustan las de los demás archivos
+   ========================================================= */
+
+/* ---------- Mouse ----------
+   Solo en equipos con mouse; en pantallas táctiles el hover se queda pegado.
+   :not(.on) evita que el hover pise el tamaño del ícono activo */
+@media (hover: hover) {
+  a:hover { color: var(--fg); }
+  .cat:not(.on):hover { color: var(--fg); }
+  .cat:not(.on):hover svg { transform: translate(var(--mx), var(--my)) scale(1.1); }
+  .item:hover { color: var(--fg); }
+  .item:not(.on):hover::before { opacity: .45; }
+  .item:hover .avatar { opacity: 1; }
+
+  .cta:hover {
+    color: var(--on-accent);
+    box-shadow: 0 0 18px rgba(255, 255, 255, .35);
+    transform: translate(var(--mx), calc(var(--my) - 1px));
+  }
+
+  .cta:hover:active { transform: translate(var(--mx), var(--my)) scale(.97); }
+
+  .plan-cta:hover {
+    border-color: var(--fg);
+    background: var(--fg);
+    color: var(--on-accent);
+  }
+
+  .plan.featured .plan-cta:hover { box-shadow: 0 0 18px rgba(255, 255, 255, .35); }
+
+  .ce-copy:hover,
+  .contact-alt:hover {
+    border-color: var(--fg);
+    background: var(--fg);
+    color: var(--on-accent);
+  }
+}
+
+/* ---------- Portátiles de poca altura ----------
+   Hasta 800px de alto (la mayoría de portátiles): menos aire arriba para que
+   el detalle y su botón quepan sin desplazarse */
+@media (max-height: 800px) and (min-width: 861px) {
+  :root {
+    --gap-top: 22px;
+    --gap-header: 16px;
+    --gap-stage: 20px;
+  }
+
+  .brand { font-size: clamp(22px, 2.5vw, 34px); }
+
+  .cat {
+    padding-top: 12px;
+    padding-bottom: 8px;
+  }
+
+  .d-title {
+    margin-bottom: var(--space-3);
+    font-size: clamp(30px, 3.2vw, 44px);
+  }
+
+  .d-body { line-height: 1.55; }
+  .d-points { margin-top: 18px; }
+  .cta { margin-top: 24px; }
+
+  /* Tarjetas de Planes más compactas */
+  .plan { padding: var(--space-5) var(--space-5) var(--space-4); }
+  .plan-price { min-height: 34px; margin-top: var(--space-3); }
+  .plan-desc { margin-top: var(--space-2); font-size: 14px; }
+  .plan-packages { margin-top: var(--space-3); }
+  .plan-packages li { padding: 7px 0; }
+
+  .plan-includes {
+    gap: 6px;
+    margin: var(--space-4) 0 var(--space-5);
+  }
+
+  .plan-includes li { font-size: 14px; }
+
+  .contact-heading { font-size: clamp(30px, 3.2vw, 44px); }
+
+  .d-features {
+    gap: var(--space-2) var(--space-5);
+    margin-top: var(--space-4);
+  }
+
+  .f-desc { font-size: 13px; }
+
+  .d-pay {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .detail.service .d-pay,
+  .detail.service .cta { margin-top: var(--space-4); }
+  .contact-email { margin-top: var(--space-5); }
+  .contact-side { padding: var(--space-5); }
+}
+
+/* Pantallas muy bajas (ej. 1920×1080 al 150 %): las tarjetas se quedan con lo esencial */
+@media (max-height: 660px) and (min-width: 861px) {
+  .plan-desc,
+  .pk-desc { display: none; }
+  .pp-amount { font-size: 26px; }
+  .f-desc { display: none; }   /* en pantallas muy bajas, solo el nombre de cada característica */
+}
+
+/* ---------- Barra compacta ----------
+   Las siete secciones en una fila, repartiendo el ancho. Deja margen para la
+   barra de desplazamiento de Windows, que resta unos 15px */
+@media (max-width: 1000px) {
+  .bar { gap: 0; }
+
+  .cat {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .cat .lbl { white-space: nowrap; }
+}
+
+/* ---------- Tablet y celular: el detalle se abre debajo del ítem activo ----------
+   El corte de 860px también está en js/dom.js (compact) */
+@media (max-width: 860px) {
+  .stage { display: block; }
+
+  .list .detail {
+    max-width: none;
+    padding: 0 12px 20px 39px;
+  }
+
+  .list .d-sub,
+  .list .d-title,
+  .list .d-avatar,
+  .list .d-status { display: none; }
+
+  .list .detail.person { display: block; }
+  .list .detail.person .d-body { margin-top: 0; }
+
+  .list .d-body { font-size: 17px; }
+  .list .d-points { margin-top: 16px; }
+  .list .cta { margin-top: 20px; }
+  .list .d-features { grid-template-columns: 1fr; }
+
+  /* Contacto: el panel en una sola columna */
+  .contact {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  /* Planes: una tarjeta debajo de la otra */
+  .plans {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
+
+/* ---------- Celular: barra en dos filas, cuatro arriba y tres abajo centradas ---------- */
+@media (max-width: 640px) {
+  /* El título en dos líneas; el tamaño sigue al ancho para que DIGITAL SOLUTIONS quepa entero */
+  .brand { font-size: min(26px, calc((100vw - 48px) / 16.5)); }
+
+  .bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 0;
+  }
+
+  .cat {
+    flex: 0 0 25%;
+    box-sizing: border-box;
+    padding: 14px 2px 10px;
+  }
+
+  .cat .lbl {
+    font-size: 13px;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* ---------- Movimiento reducido: todo quieto ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .w1,
+  .w2,
+  .brand.intro .ch,
+  .cat.on svg,
+  .item.on .it-t,
+  .item.on .dot,
+  .list.enter .item,
+  .detail.enter,
+  .plans.enter .plan,
+  .plans.enter .plans-note,
+  .contact.enter > *,
+  .plan.on::before { animation: none; }
+
+  .plan,
+  .plan-cta,
+  .ce-copy,
+  .contact-alt,
+  .ch,
+  .cat,
+  .cat svg,
+  .cat::after,
+  .item,
+  .item::before,
+  .dot,
+  .it-t,
+  .it-s,
+  .avatar,
+  .cta { transition: none; }
+}

@@ -1,0 +1,190 @@
+/* =========================================================
+   ISOMETRICAL DIGITAL SOLUTIONS
+   Inspirada en la interfaz del PSP: todo se desliza, lo
+   seleccionado respira y las ondas siguen vivas al fondo.
+   ========================================================= */
+
+/* Base: variables, página, ondas y título. Se carga primero.
+   Orden: base → nav → list → plans → team → detail → responsive */
+
+/* ---------- Variables ---------- */
+:root {
+  --bg: #000000;
+  --fg: #FFFFFF;
+  --muted: #8C8C8C;
+  --soft: #CFCFCF;
+  --accent: #FFFFFF;
+  --on-accent: #000000;
+  --line: rgba(255, 255, 255, .14);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --wide: 'Michroma', 'Arial Black', 'Segoe UI', sans-serif;   /* solo para el título ISOMETRICAL DIGITAL SOLUTIONS */
+  --friendly: 'Outfit', 'Segoe UI', Arial, sans-serif;         /* precios y planes: redonda y amigable */
+  --spring: cubic-bezier(.2, .9, .25, 1);   /* rebote corto: íconos y botones */
+  --glide: cubic-bezier(.22, .61, .36, 1);  /* deslizamiento suave */
+  --quick: .15s;                            /* respuesta inmediata: color y luz */
+  --move: .22s;                             /* movimiento y tamaño */
+  --breath: 3.2s;                           /* ritmo del brillo de lo seleccionado */
+  --dwell: 400ms;                           /* cursor quieto sobre una sección hasta abrirla (DWELL_MS en js/app.js) */
+  --online: #4ADE80;                        /* punto de "activo" en el equipo, como en la consola */
+  --page: 1120px;                           /* ancho máximo del contenido */
+  --gutter: clamp(20px, 5vw, 72px);         /* margen a los lados */
+  --waves-h: clamp(150px, 26vh, 260px);     /* alto de la franja de ondas al pie */
+
+  /* Espaciado: una sola escala para toda la página */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --gap-top: clamp(28px, 5vh, 48px);         /* borde de arriba → título */
+  --gap-header: clamp(36px, 7vh, 72px);      /* título → barra */
+  --gap-stage: clamp(32px, 6vh, 56px);       /* barra → contenido */
+  --gap-columns: clamp(40px, 6vw, 96px);     /* lista ↔ detalle */
+}
+
+/* ---------- Base ---------- */
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+/* Reserva siempre el lugar de la barra de desplazamiento: al pasar de una sección corta
+   a una larga, el contenido no se corre de lado */
+html {
+  scrollbar-gutter: stable;
+  color-scheme: dark;                      /* barra de desplazamiento y controles oscuros */
+  scrollbar-color: #3A3A3A transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+a { color: var(--muted); }
+
+/* hidden siempre oculta, aunque el elemento tenga su propio display (lista, detalle, tarjetas) */
+[hidden] { display: none !important; }
+
+.ids {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--gap-top) var(--gutter) calc(var(--waves-h) * .72);  /* abajo: al bajar hasta el final, el texto queda sobre las líneas de las ondas */
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-weight: 300;
+}
+
+/* Todo el contenido comparte el mismo ancho, centrado */
+.top,
+.bar,
+.stage {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+}
+
+/* ---------- Ondas ----------
+   Fondo fijo al pie de la pantalla: no se mueve ni se estira al cambiar de sección.
+   Avanzan, se ondulan y se corren apenas con el cursor (--wx, desde js/motion.js);
+   sobresalen a los lados para que ese corrimiento no deje bordes vacíos */
+.waves {
+  position: fixed;
+  left: -32px;
+  width: calc(100vw + 64px);   /* 100vw no cambia con la barra de desplazamiento: las ondas no se reescalan */
+  bottom: 0;
+  z-index: 0;
+  height: var(--waves-h);
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(var(--wx, 0px), 0, 0);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 55%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 55%);
+}
+
+.waves svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+
+.w1 { animation: drift 52s linear infinite, swell 9s ease-in-out infinite alternate; }
+.w2 { animation: drift 78s linear infinite reverse, swell 13s ease-in-out infinite alternate-reverse; }
+
+@keyframes drift {
+  from { translate: 0 0; }
+  to { translate: -50% 0; }
+}
+
+@keyframes swell {
+  from { scale: 1 1; }
+  to { scale: 1 1.08; }
+}
+
+/* ---------- Encabezado ---------- */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Un solo estilo para todo el título: ISOMETRICAL DIGITAL SOLUTIONS en la misma letra,
+   tamaño y color. En computador cabe en una línea; en celular se parte entre las dos palabras */
+.brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 .4em;
+  margin: 0;
+  font-family: var(--wide);
+  font-size: clamp(22px, 2.85vw, 40px);
+  line-height: 1.15;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Cada parte se queda entera: nunca se parte una palabra por la mitad */
+.brand-name,
+.brand-sub { white-space: nowrap; }
+
+/* Cada letra del título (js/motion.js): entra en cascada y se levanta cerca del cursor (--lift, 0 a 1) */
+.ch {
+  display: inline-block;
+  transform: translateY(calc(var(--lift, 0) * -6px));
+  text-shadow: 0 0 calc(var(--lift, 0) * 18px) rgba(255, 255, 255, calc(var(--lift, 0) * .65));
+  transition: transform var(--move) var(--spring), text-shadow var(--move) var(--glide);
+}
+
+.brand.intro .ch {
+  animation: letter .5s var(--glide) both;
+  animation-delay: calc(var(--n, 0) * 40ms);
+}
+
+@keyframes letter {
+  from { opacity: 0; translate: 0 10px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

@@ -1,0 +1,196 @@
+/* =========================================================
+   DETALLE · texto, botón y animaciones de entrada
+   ========================================================= */
+
+.detail {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 640px;
+  padding-top: 6px;
+}
+
+.d-sub {
+  margin: 0 0 var(--space-3);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.d-title {
+  margin: 0 0 var(--space-5);
+  font-size: clamp(32px, 3.6vw, 52px);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -.015em;
+}
+
+.d-body {
+  max-width: 54ch;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--soft);
+  white-space: pre-line;
+}
+
+.d-body p { margin: 0; }
+.d-body p + p { margin-top: var(--space-4); }
+
+.d-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.d-points[hidden] { display: none; }
+
+.d-points li {
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--soft);
+}
+
+/* ---------- Ficha del servicio: qué incluye y cómo se paga ---------- */
+.d-features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-5);
+  max-width: 600px;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.d-features li {
+  position: relative;
+  display: grid;
+  align-content: start;   /* la descripción pegada a su nombre aunque la fila sea más alta */
+  gap: 2px;
+  padding-left: 22px;
+}
+
+/* Visto dibujado con dos bordes, como en Planes y Contacto */
+.d-features li::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 1px;
+  width: 11px;
+  height: 6px;
+  border-left: 1.5px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+  transform: rotate(-45deg);
+}
+
+.f-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--fg);
+}
+
+.f-desc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.d-pay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: var(--space-5) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .03);
+}
+
+.pay-label {
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pay-value {
+  font-family: var(--friendly);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--fg);
+}
+
+/* En la ficha del servicio, "Cómo se paga" y el botón van en la misma línea */
+.detail.service .d-pay,
+.detail.service #dCta {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.detail.service .d-pay { margin: var(--space-5) var(--space-3) 0 0; }
+.detail.service .cta { margin-top: var(--space-5); }
+
+/* ---------- Botón ---------- */
+.cta {
+  --mx: 0px;                            /* sigue un poco al cursor (js/motion.js) */
+  --my: 0px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  margin-top: var(--space-6);
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transform: translate(var(--mx), var(--my));
+  transition: box-shadow var(--quick) var(--glide), transform var(--move) var(--spring);
+}
+
+.cta:active { transform: translate(var(--mx), var(--my)) scale(.97); }
+
+/* ---------- Foco y toque ---------- */
+.cat:focus-visible,
+.item:focus-visible,
+.cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.cat,
+.item,
+.cta { -webkit-tap-highlight-color: transparent; }
+
+/* ---------- Entradas ----------
+   Al cambiar de sección los ítems llegan en cascada corta (--i, desde js/render.js);
+   el detalle aparece de inmediato con un fundido breve */
+.list.enter .item {
+  animation: rise .3s var(--glide) both;
+  animation-delay: calc(var(--i, 0) * 25ms);
+}
+
+.detail.enter { animation: reveal .24s var(--glide) both; }
+
+@keyframes rise {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes reveal {
+  from { opacity: 0; translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
