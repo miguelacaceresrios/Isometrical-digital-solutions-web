@@ -27,9 +27,4 @@ Cada sección de `CATS` puede tener un campo `view`:
 - No prometa nada que no ofrezcamos. Los precios van solo en `PRICES`.
 - Antes de agregar a alguien a `TEAM`, avisa.
 
-## Reglas 
-
-- Nombres en inglés; comentarios breves en español, solo cuando el porqué no sea obvio.
-- Si un junior no lo entiende al leerlo, se simplifica.
-- Cada commit lo firma la persona que hizo el cambio, sin co-autoría ni mención de IA.
 
