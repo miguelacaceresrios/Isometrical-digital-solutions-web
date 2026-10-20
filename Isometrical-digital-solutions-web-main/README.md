@@ -21,24 +21,15 @@ Cada sección de `CATS` puede tener un campo `view`:
 
 ## Reglas para escribir textos
 
-- Español de Colombia, tratando al cliente de **usted**.
+- Español, tratando al cliente de **usted**.
 - Frases cortas y directas, sin eslóganes ni frases de publicidad.
 - Sin tecnicismos: diga qué gana el negocio, no qué tecnología usamos.
-- No prometa nada que no ofrezcamos. Los precios van solo en `PRICES`, y la facturación electrónica no se menciona hasta que esté lista.
-- Antes de agregar a alguien a `TEAM`, pídale permiso.
+- No prometa nada que no ofrezcamos. Los precios van solo en `PRICES`.
+- Antes de agregar a alguien a `TEAM`, avisa.
 
-## Reglas del código
+## Reglas 
 
-- Sin frameworks, librerías ni paso de compilación.
 - Nombres en inglés; comentarios breves en español, solo cuando el porqué no sea obvio.
 - Si un junior no lo entiende al leerlo, se simplifica.
 - Cada commit lo firma la persona que hizo el cambio, sin co-autoría ni mención de IA.
 
-## Antes de publicar
-
-- [x] Llenar `PRICES` (y el mínimo de meses del contrato).
-- [x] Definir qué agrega la Página Negocio frente a la Básica (`desc` de cada paquete en Planes).
-- [x] Poner el número de WhatsApp.
-- [ ] Decidir si la Página web incluye alojamiento o si se paga aparte con el Plan mensual.
-- [ ] Llenar los `[corchetes]` de Proyectos o quitar esos ítems.
-- [ ] Revisar la página en un celular y en un portátil.
