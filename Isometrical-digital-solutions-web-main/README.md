@@ -27,31 +27,6 @@ Casi todo está en `js/content.js`. Si solo va a cambiar textos o datos, no nece
 
 Los textos entre `[corchetes]` son datos pendientes. La página los muestra tal cual, así que hay que reemplazarlos antes de publicar.
 
-## Cómo está organizado
-
-```
-index.html          estructura de la página
-favicon.svg         ícono de la pestaña
-css/                el orden de carga importa: cada archivo puede ajustar a los anteriores
-  base.css          variables, página, ondas y título
-  nav.css           barra de secciones
-  list.css          lista de ítems
-  plans.css         tarjetas de precios (Planes)
-  contact.css       panel de contacto
-  team.css          lista de amigos (Equipo)
-  detail.css        detalle, botón y animaciones de entrada
-  responsive.css    mouse, pantallas bajas, tablet, celular y movimiento reducido
-js/                 se cargan en este orden
-  content.js        textos y datos
-  dom.js            elementos de la página y utilidades
-  render.js         pinta la barra, la lista y el detalle
-  plans.js          pinta las tarjetas de Planes
-  contact.js        pinta el panel de Contacto
-  team.js           trae los perfiles de GitHub
-  motion.js         título, ondas y lo que sigue al cursor
-  app.js            estado, navegación, teclado y arranque
-.github/workflows/  aviso en Discord en cada push a main
-```
 
 ### Cómo se ve cada sección
 
