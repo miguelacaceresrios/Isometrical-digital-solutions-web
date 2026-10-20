@@ -84,7 +84,8 @@ const TEAM = [
   { github: 'HugoReynaldo' },
   { github: 'tomatitooou' },
   { github: 'KeynerCaicedo' },
-  { github: 'itiel06' }
+  { github: 'itiel06' },
+  { github: 'MrDaav'}
 ];
 
 // Cada integrante es un ítem tipo "amigo de consola" en la sección Equipo
@@ -194,7 +195,8 @@ const CATS = [
         features: [
           { name: 'Revisión completa', desc: 'De su página o de su sistema.' },
           { name: 'Fallas comunes', desc: 'Las encontramos a tiempo.' },
-          { name: 'Prioridades claras', desc: 'Qué corregir primero, sin tecnicismos.' }
+          { name: 'Prioridades claras', desc: 'Qué corregir primero, sin tecnicismos.' },
+          { name: 'Reporte de hallazgos', desc: 'Documento con los resultados, sin tecnicismos.'}
         ],
         pay: 'Se cotiza según su caso',
         cta: { label: 'Cotizar por correo', href: mail('Cotizar una revisión de seguridad') }
@@ -337,7 +339,7 @@ const CATS = [
         key: 'correo',
         title: 'Correo',
         sub: EMAIL,
-        body: 'El correo se abre con un borrador listo para completar.',
+        body: 'Se abrirá un borrador listo para completar, ya sea por correo o por WhatsApp.',
         cta: { label: 'Escribir correo', href: mail(HELLO) }
       },
       {
