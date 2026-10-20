@@ -1,32 +1,7 @@
-# Isometrical Digital Solutions · sitio web
+# Isometrical Digital Solutions 
 
-La página con la que conseguimos clientes: qué hacemos, cuánto cuesta, quiénes somos y cómo escribirnos. Está inspirada en la interfaz del PSP: una barra de secciones, una lista y un detalle que se deslizan, y ondas de fondo.
-
-Es HTML, CSS y JavaScript sin frameworks, sin librerías y sin paso de compilación. Lo que ve en los archivos es lo que se publica.
-
-## Verla en su computador
-
-Abra `index.html` en el navegador. No hace falta servidor.
-
-- La sección **Equipo** necesita internet: los perfiles se traen de GitHub.
-- Para verla en el celular, sírvala en su red local, por ejemplo con la extensión *Live Server* de VS Code, y abra la dirección que le muestre.
-
-## Dónde se cambia cada cosa
-
-Casi todo está en `js/content.js`. Si solo va a cambiar textos o datos, no necesita tocar nada más.
-
-| Quiero cambiar… | Dónde | Cómo |
-|---|---|---|
-| Un texto de cualquier sección | `js/content.js` → `CATS` | Cada sección tiene sus ítems con `title`, `sub` y `body`. |
-| Los precios | `js/content.js` → `PRICES` | En pesos, sin puntos: `1200000`. Si queda en `null`, la página dice "Precio por correo". |
-| El equipo | `js/content.js` → `TEAM` | Solo el usuario de GitHub. Foto, nombre y descripción salen de su perfil. El orden se mezcla en cada visita. |
-| El correo | `js/content.js` → `EMAIL` | Todos los botones de correo lo usan. |
-| WhatsApp | `js/content.js` → `WHATSAPP` y `WHATSAPP_VISIBLE` | El primero solo con dígitos y el 57 adelante; el segundo como se lee. Mientras siga entre corchetes, WhatsApp no aparece. |
-| El borrador que trae cada correo | `js/content.js` → `DRAFT` y `JOIN_DRAFT` | Son las preguntas que el cliente solo tiene que completar. |
-| Colores, espacios y fuentes | `css/base.css` → `:root` | Use siempre las variables (`--space-4`, `--muted`…), no números sueltos. |
-
-Los textos entre `[corchetes]` son datos pendientes. La página los muestra tal cual, así que hay que reemplazarlos antes de publicar.
-
+La página con la que conseguimos clientes: 
+qué hacemos, cuánto cuesta, quiénes somos y cómo escribirnos. Está inspirada en la interfaz del PSP: una barra de secciones, una lista y un detalle que se deslizan, y ondas de fondo.
 
 ### Cómo se ve cada sección
 
