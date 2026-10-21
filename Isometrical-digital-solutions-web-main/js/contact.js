@@ -17,11 +17,11 @@ function renderContact() {
   main.append(emailBox(mailItem.sub));
 
   const actions = el('div', 'contact-actions');
-  const write = el('a', 'cta', mailItem.cta.label);
+  const write = el('a', 'cta contact-email-cta', mailItem.cta.label);
   write.href = mailItem.cta.href;
   actions.append(write);
   if (hasWhatsApp()) {
-    const chat = el('a', 'contact-alt', waItem.cta.label);
+    const chat = el('a', 'cta contact-whatsapp-cta', waItem.cta.label);
     chat.href = waItem.cta.href;
     chat.target = '_blank';
     chat.rel = 'noopener';

@@ -62,8 +62,7 @@
   user-select: all;
 }
 
-.ce-copy,
-.contact-alt {
+.ce-copy {
   border: 1px solid rgba(255, 255, 255, .3);
   border-radius: 999px;
   background: none;
@@ -90,21 +89,32 @@
   margin-top: var(--space-5);
 }
 
-.contact-actions .cta { margin-top: 0; }
-
-.contact-alt {
-  display: inline-flex;
-  align-items: center;
-  min-height: 52px;
-  padding: 0 26px;
-  font-size: 16px;
-  font-weight: 600;
+.contact-actions .cta {
+  margin-top: 0;
+  transition: background-color var(--quick) var(--glide), color var(--quick) var(--glide), border-color var(--quick) var(--glide), box-shadow var(--quick) var(--glide), transform var(--move) var(--spring);
 }
 
-.ce-copy:focus-visible,
-.contact-alt:focus-visible {
+.ce-copy:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+.contact-actions .contact-whatsapp-cta {
+  border: 1px solid rgba(255, 255, 255, .3);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.contact-actions:has(.contact-whatsapp-cta:hover) .contact-email-cta {
+  border: 1px solid rgba(255, 255, 255, .3);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.contact-actions:has(.contact-whatsapp-cta:hover) .contact-whatsapp-cta {
+  border-color: var(--fg);
+  background: var(--fg);
+  color: var(--on-accent);
 }
 
 .contact-note {

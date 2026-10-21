@@ -30,8 +30,7 @@
 
   .plan.featured .plan-cta:hover { box-shadow: 0 0 18px rgba(255, 255, 255, .35); }
 
-  .ce-copy:hover,
-  .contact-alt:hover {
+  .ce-copy:hover {
     border-color: var(--fg);
     background: var(--fg);
     color: var(--on-accent);
@@ -200,7 +199,6 @@
   .plan,
   .plan-cta,
   .ce-copy,
-  .contact-alt,
   .ch,
   .cat,
   .cat svg,
